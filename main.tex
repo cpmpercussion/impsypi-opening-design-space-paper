@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\title{Generative AI in a MIDI Plug: Making Intelligent Musical Instruments Accessible for Musicians}
+\title{Design Patterns for Intelligent Musical Instruments: Case Studies in Performance with IMPSYpi}
 
 \author{Charles Patrick Martin}
 \email{charles.martin@anu.edu.au}
@@ -47,7 +47,6 @@ This system could be applied by a wide community of musicians and instrument des
 \end{figure}
 
 This paper explores how generative AI may be embedded within interactive musical systems for live performance through a series of case study instruments and performances where hardware and software synthesisers and instruments have been coupled with a Linux-based single board computer pre-loaded with generative AI software.
-% This paper proposes a minimal approach to embedding generative AI within musical systems by coupling what may be the cheapest Linux-based single board computer, the Raspberry Pi Zero, with one of the simplest systems for networking musical devices, MIDI. 
 A broad range of NIME research has applied AI techniques, and in particular deep learning, for tasks such as mapping, audio or sensor analysis and musical data generation~\cite{jourdan_nime_ml_review}. While the analysis of gestures~\cite{visi_iml_gesture} remains a popular application, deep learning models now enable generation of audio~\cite{caillon_rave}, symbolic music~\cite{symbolicmusic2023}, and interaction~\cite{Martin2019} data.
 Despite this wide range of research, relatively few intelligent musical instruments, that is, digital musical instruments (DMIs) integrating generative AI, are available to be used in ordinary musical practice.
 The goal of this research is to open the design space of intelligent musical instruments by proposing an approach to creating such systems that is cheap, minimal, and battery-powered, thus enabling integration into a wider variety of musical systems by a diverse population of artists and experimenters. 
@@ -75,6 +74,10 @@ The present paper documents the process of creating our GenAI MIDI Plug showing 
 This process has also revealed pain points in setting up a generative AI instrument and new possibilities for co-creation that might encourage more widespread prototyping, hacking, and musicking with AI in NIMEs.
 
 \section{System Design}\label{sys-design}
+
+% Update this to relate specifically to IMPSYpi and the different connectivity methods.
+% This shouldn't go too much into specific examples, just explain how the system works.
+
 
 The GenAI MIDI Plug system consists of Python software and a minimal hardware setup that able to run the generative AI software and communicate MIDI messages to an external electronic music device. Unlike other embedded music systems, this setup is not intended to produce sound but simply control other electronic music devices so the single board computer does not need to have an audio output. To support our design goals of minimal size and price but with good support for other instrument designers a Raspberry Pi Zero 2 W was used in our project. This single board computer includes a quad-core 64-bit ARM Cortex-A53 at 1GHz with 512MB of RAM. This board meets the cost (15USD as of 2024) and size (65mm x 30mm) requirements. Crucially, it is able to run the 64-bit Raspberry Pi OS ensuring good compatibility with machine learning libraries for Python. The Pi is configured to run our software on boot.
 
@@ -110,7 +113,20 @@ These messages can be constructed within Python using raw sequences of MIDI byte
 Our software can be easily modified to send different types of MIDI information (e.g., continuous controller messages).
 Although we have configured our system to generate one dimension of musical data (in addition to time deltas), the MDRNN architecture can support multiple dimensions of data and could control different MIDI values or channels simultaneously in other applications. The source code for our system is open source and available for use and modification by other instrument designers: \url{https://github.com/cpmpercussion/empi/tree/midiserial}.
 
-\section{Discussion and Conclusions}\label{concl}
+\section{Case Studies}\label{case-studies}
+
+In this section we describe case studies where we have used IMPSYpi to create intelligent musical instruments and performed with them in live concerts. We have applied an exploratory and autobiographical artistic research approach where these instruments have been developed for our own use and tested in authentic live performance situations.
+
+\subsection{The Intelligent MicroFreak and S-1}
+
+\subsection{Off-the-shelf}
+
+\subsection{Touching Wires}
+
+\subsection{Intelligent DAWs: Ableton Live and Kymatica AUM}
+
+
+\section{Discussion}\label{disc}
 
 Our system has been tested in the context of electronic music improvisation where control over a synthesiser is shared between a human and the GenAI MIDI Plug. Figure \ref{fig:human-ai} and our accompanying video\footnote{\url{https://vimeo.com/911078203}} shows excerpts from an outdoor battery-powered improvisation. In this example, the synthesiser is a Korg Volca FM with note values (pitch and rhythm) controlled by the GenAI MIDI Plug. The musician adjusts parameters on the synthesiser patch including pitch shifting the GenAI MIDI signals by octaves.
 
@@ -125,11 +141,8 @@ There may be potential to port this system to use lighter libraries (e.g., Tenso
 
 This work has introduced a minimal approach to creating an intelligent musical instrument, the GenAI MIDI Plug. This research aims to address gaps in creative practice and interaction that have been identified in NIME applications of generative AI. While enabling artist-led data collection and training may support a small-data approach, cheap minimal battery-powered AI music controllers could encourage a greater range of experimentation and prototyping among the wider music community.
 
-% TODO Conclusions Paragraph
+\section{Conclusions}\label{concl}
 
-\section{Ethical Standards}
-
-This research did not involve human participants apart from the author. There were no conflicts of interest.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{nime-references} 
