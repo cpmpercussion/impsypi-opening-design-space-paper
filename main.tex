@@ -155,6 +155,10 @@ This dataset may be more applicable to synthesis parameter control tasks where a
 	\label{fig:s-1}
 \end{figure}
 
+While the above example demonstrated one-way input from IMPSYpi into a hardware synthesiser, other systems promised to support two-way interaction. 
+Establishing a MIDI-over-USB connection between IMPSYpi and a hardware synth often allows physical controls on the synthesiser to send signals to the IMPSYpi while simultaneously controlling the synthesiser.
+The IMPSYpi is then configured to behave in a call-and-response manner so that when the human is adjusting the synth controls and playing notes, these IMPSYpi tracks these signals and only when the human stops for a certain amount of time does the IMPSYpi take over the controls. 
+This arrangement was first trialled with an Arturia MicroFreak synthesiser with IMPSYpi controlling 8 parameters: note-on messages
 
 
 \subsection{Off-the-shelf}
