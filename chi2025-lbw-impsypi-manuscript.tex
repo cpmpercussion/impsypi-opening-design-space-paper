@@ -1,11 +1,12 @@
-%% Special GenAICHI Settings and Setup
-% \documentclass[manuscript,screen,nonacm]{acmart}
 \documentclass[manuscript,review,anonymous]{acmart}
 % \acmConference[]{} % need to include this to suppress addresses footer
 
 \begin{document}
 
-\title{Design Patterns for Intelligent Musical Instruments: Case Studies in Performance with IMPSYpi}
+%\title{Design Patterns for Intelligent Musical Instruments: Case Studies in Performance with IMPSYpi}
+\title{Performing with Flexible and Accessible Intelligent Musical Instruments}
+
+% Developing a Creative Practice with Intelligent Musical Instruments
 
 \author{Charles Patrick Martin}
 \email{charles.martin@anu.edu.au}
@@ -29,14 +30,40 @@ This system could be applied by a wide community of musicians and instrument des
 
 \keywords{generative AI, small data, human-AI interaction, intelligent musical instruments}
 
-% \ccsdesc[500]{Applied computing~Sound and music computing}
-% \ccsdesc[300]{Human-centered computing~Ubiquitous and mobile computing systems and tools}
-% \ccsdesc[300]{Computing methodologies~Neural networks}
-% \printccsdesc
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10010405.10010469.10010475</concept_id>
+       <concept_desc>Applied computing~Sound and music computing</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10003120.10003121</concept_id>
+       <concept_desc>Human-centered computing~Human computer interaction (HCI)</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10010147.10010257.10010293.10010294</concept_id>
+       <concept_desc>Computing methodologies~Neural networks</concept_desc>
+       <concept_significance>100</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Applied computing~Sound and music computing}
+\ccsdesc[500]{Human-centered computing~Human computer interaction (HCI)}
+\ccsdesc[100]{Computing methodologies~Neural networks}
 
 \maketitle
 
 \section{Introduction}\label{intro}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/garage-concert-arturia.jpg}
+    \caption{A battery-powered performance with an generative AI  synthesiser setup. Our software runs on the Raspberry Pi 4 which interacts with the synthesiser continuing and reacting to the musicians' actions.}
+    \label{fig:enter-label}
+\end{figure}
 
 This paper explores how generative AI may be embedded within interactive musical systems for live performance through a series of case study instruments and performances where hardware and software synthesisers and instruments have been coupled with a Linux-based single board computer pre-loaded with generative AI software.
 A broad range of NIME research has applied AI techniques, and in particular deep learning, for tasks such as mapping, audio or sensor analysis and musical data generation~\cite{jourdan_nime_ml_review}. While the analysis of gestures~\cite{visi_iml_gesture} remains a popular application, deep learning models now enable generation of audio~\cite{caillon_rave}, symbolic music~\cite{symbolicmusic2023}, and interaction~\cite{Martin2019} data.
@@ -45,7 +72,7 @@ The goal of this research is to open the design space of intelligent musical ins
 Our IMPSYpi system includes an implementation of a mixture density recurrent neural network (MDRNN), appropriate for generating expressive musical signals from small artist-centered datasets. 
 This system can communicate to existing software and hardware musical systems using MIDI over USB, standard MIDI hardware connections, as well as OSC or WebSockets over a network.
 In this way, existing musical systems can be integrated with a generative AI system to create an intelligent musical instrument that can play by itself or take turns with and adapt to a human performer's input.
-In this research we introduce IMPSYpi and explore it's potential through a number of case studies of intelligent musical instruments used in our artistic research.
+In this research we introduce IMPSYpi and explore its potential through a series of artistic research performances.
 Our experiments show that this idea is feasible and useful for experimenting with human-AI musical interaction.
 We distill lessons learned through ideation, development and performance with these systems to propose design recommendations for future intelligent musical instruments.
 This work could serve as a basis for prototyping further intelligent musical instruments and exploring their application in different creative practices.
@@ -80,20 +107,27 @@ This process has also revealed pain points in setting up a generative AI instrum
 % Update this to relate specifically to IMPSYpi and the different connectivity methods.
 % This shouldn't go too much into specific examples, just explain how the system works.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/impsy-diagram.png}
+    \caption{A diagram of IMPSYpi's interactions with a synthesiser and performer. IMPSYpi connects to other devices via MIDI and receives signals from a human performer or can send signals to control sound on the synthesiser.}
+    \label{fig:enter-label}
+\end{figure}
 
 The GenAI MIDI Plug system consists of Python software and a minimal hardware setup that able to run the generative AI software and communicate MIDI messages to an external electronic music device. Unlike other embedded music systems, this setup is not intended to produce sound but simply control other electronic music devices so the single board computer does not need to have an audio output. To support our design goals of minimal size and price but with good support for other instrument designers a Raspberry Pi Zero 2 W was used in our project. This single board computer includes a quad-core 64-bit ARM Cortex-A53 at 1GHz with 512MB of RAM. This board meets the cost (15USD as of 2024) and size (65mm x 30mm) requirements. Crucially, it is able to run the 64-bit Raspberry Pi OS ensuring good compatibility with machine learning libraries for Python. The Pi is configured to run our software on boot.
 
+
+\subsection{Hardware}
+
+
 The hardware setup is shown in Figure \ref{fig:system-photo} and consists of a Raspberry Pi Zero 2 W and standard enclosure, a 16GB microSD card and MIDI (5-pin DIN) connector. The MIDI connector is linked via a short cable to the Raspberry Pi and soldered directly to GPIO pads corresponding to the Pi's serial (UART) output. Providing a MIDI output from the Pi's 3.3V signals is straightforward requiring only two resistors~\cite{MIDI-Manufacturers-Association:2014aa}: 10$\Omega$ between the UART TX pin and pin 5 on the MIDI connector and 33$\Omega$ between the 3.3V output and MIDI pin 4. MIDI pin 2 is connected to ground. In our setup, the resistors are concealed within the MIDI connector.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{figures/desk-shot.jpg}
-    \caption{The GenAI MIDI Plug with cover removed. The hardware consists of a Raspberry Pi Zero 2 W with case, 16GB microSD card, and a MIDI connector soldered directly to the Raspberry Pi.}
-    \label{fig:system-photo}
-\end{figure}
+\subsection{Software}
 
 The software part of our system is a Python program running on the Raspberry Pi that generates musical data and sends it via a serial connection to an external MIDI-enabled electronic musical instrument.
 Following Martin and Torresen~\cite{Martin2019}, we use a mixture density recurrent neural network (MDRNN) as the machine learning paradigm for generating a stream of musical data and we apply the Keras-MDN-Layer library~\cite{keras-mdn-layer} to construct this neural network.
+
+\subsection{AI model}
 
 Our system uses a two dimensional MDRNN that generates pairs of data that we interpret as a musical value and time delta for when that value should occur in the future. 
 The network is autoregressive, so takes the preceding value as input to the generate next, but it is also recurrent, so it stores a lossy history of generated values using LSTM units. 
@@ -101,21 +135,41 @@ Our MDRNN model is configured to use 2 layers of 32 LSTM units. Although this is
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{figures/sf-image.jpg}
-    \caption{Circuit diagram for the GenAI MIDI Plug. A MIDI output can be obtained from a Raspberry Pi with the addition of only two resistors that can be concealed inside the MIDI connector.}
-    \label{fig:enter-label}
+    \includegraphics[width=0.99\linewidth]{figures/prediction_time_against_units_facet_log.png}
+    \caption{A plot of the time for single AI predictions on different hardware and model size. Even the slowest Raspberry Pi Zero 2 W runs predictions under 5ms using Tensorflow Lite.}
+    \label{fig:inference-time}
 \end{figure}
-
-\section{Case Studies}\label{case-studies}
-
-In this section we describe case studies where we have used IMPSYpi to create intelligent musical instruments and performed with them in live concerts. We have applied an exploratory and autobiographical artistic research approach where these instruments have been developed for our own use and tested in authentic live performance situations.
-
-\subsection{The Self-Playing Volca}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{figures/outside-1.jpg}
-    \caption{Battery-powered human-AI interaction on a Korg Volca FM. The generative AI system running on the Raspberry Pi Zero controls pitch and rhythm via the MIDI connector while the musician edits the synth patch. Video: \url{https://vimeo.com/911078203}}
+    \includegraphics[width=0.8\linewidth]{figures/desk-angle.jpg}
+    \caption{The GenAI MIDI Plug with cover removed. The hardware consists of a Raspberry Pi Zero 2 W with case, 16GB microSD card, and a MIDI connector soldered directly to the Raspberry Pi.}
+    \label{fig:system-photo}
+\end{figure}
+
+
+
+
+\section{Performance Experiences}\label{case-studies}
+
+This section describes a series of musical performances where the author used IMPSYpi to create intelligent musical instruments and performed with them in live concerts.
+We have applied an exploratory and autobiographical artistic research approach where these instruments have been developed for our own use and tested in authentic live performance situations.
+
+\subsection{The Self-Playing Volca}
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\columnwidth]{figures/sf-image.jpg}
+%     \caption{Circuit diagram for the GenAI MIDI Plug. A MIDI output can be obtained from a Raspberry Pi with the addition of only two resistors that can be concealed inside the MIDI connector.}
+%     \label{fig:enter-label}
+% \end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/outside-1.jpg}
+    \caption{Battery-powered human-AI interaction on a Korg Volca FM. The generative AI system running on the Raspberry Pi Zero controls pitch and rhythm via the MIDI connector while the musician edits the synth patch. 
+    % Video: \url{https://vimeo.com/911078203}
+    }
     \label{fig:self-playing-volca}
 \end{figure}
 
@@ -137,46 +191,34 @@ Sent through the Volca FM, these can sound unusual as the synthesiser retriggers
 This dataset may be more applicable to synthesis parameter control tasks where a musician would like a particular value to change smoothly in an expressive way including varying speed and pauses.
 
 
-\subsection{The Intelligent MicroFreak and S-1}
+\subsection{The Intelligent MicroFreak}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\columnwidth]{figures/intelligent-microfreak.jpg}
-	\caption{}
+	\includegraphics[width=0.8\linewidth]{figures/intelligent-microfreak.jpg}
+	\caption{The intelligent MicroFreak setup on stage. IMPSYpi runs on a Raspberry Pi Zero 2 W (upper left), the Arturia Microfreak (lower right) is the main instrument while a Zoom effects pedal (lower left) provides additional audio effects.}
 	\label{fig:microfreak}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\columnwidth]{figures/intelligent-s-1.jpg}
-	\caption{}
-	\label{fig:s-1}
-\end{figure}
 
 While the above example demonstrated one-way input from IMPSYpi into a hardware synthesiser, other systems promised to support two-way interaction. 
 Establishing a MIDI-over-USB connection between IMPSYpi and a hardware synth often allows physical controls on the synthesiser to send signals to the IMPSYpi while simultaneously controlling the synthesiser.
 The IMPSYpi is then configured to behave in a call-and-response manner so that when the human is adjusting the synth controls and playing notes, these IMPSYpi tracks these signals and only when the human stops for a certain amount of time does the IMPSYpi take over the controls. 
 This arrangement was first trialled with an Arturia MicroFreak synthesiser with IMPSYpi controlling 8 parameters: note-on messages
 
-
-\subsection{Off-the-shelf}
-
+\subsection{Performing with others: Intelligent S-1}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\columnwidth]{figures/off-the-shelf-0coast.jpg}
-	\caption{}
-	\label{fig:off-the-shelf}
+	\includegraphics[width=0.8\linewidth]{figures/intelligent-s-1.jpg}
+	\caption{A performance setup on the floor with the Roland S-1 synthesiser, Zoom effects pedal, and IMPSYpi running on a Raspberry Pi 4.}
+	\label{fig:s-1}
 \end{figure}
 
+%\subsection{Intelligent DAWs: Ableton Live and Kymatica AUM}
 
 
-\subsection{Touching Wires}
-
-\subsection{Intelligent DAWs: Ableton Live and Kymatica AUM}
-
-
-\section{Discussion}\label{disc}
+\section{Conclusions and Future Work}\label{conclusions}
 
 Our system has been tested in the context of electronic music improvisation where control over a synthesiser is shared between a human and the GenAI MIDI Plug. Figure \ref{fig:human-ai} and our accompanying video\footnote{\url{https://vimeo.com/911078203}} shows excerpts from an outdoor battery-powered improvisation. In this example, the synthesiser is a Korg Volca FM with note values (pitch and rhythm) controlled by the GenAI MIDI Plug. The musician adjusts parameters on the synthesiser patch including pitch shifting the GenAI MIDI signals by octaves.
 
@@ -190,8 +232,6 @@ Once the system is running, data generation with the MDRNN is quick; however, th
 There may be potential to port this system to use lighter libraries (e.g., Tensorflow-Lite) that may load more quickly from boot and could also improve the installation experience for instrument designers.
 
 This work has introduced a minimal approach to creating an intelligent musical instrument, the GenAI MIDI Plug. This research aims to address gaps in creative practice and interaction that have been identified in NIME applications of generative AI. While enabling artist-led data collection and training may support a small-data approach, cheap minimal battery-powered AI music controllers could encourage a greater range of experimentation and prototyping among the wider music community.
-
-\section{Conclusions}\label{concl}
 
 
 \bibliographystyle{ACM-Reference-Format}
