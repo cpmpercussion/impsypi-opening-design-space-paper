@@ -4,7 +4,8 @@
 \begin{document}
 
 %\title{Design Patterns for Intelligent Musical Instruments: Case Studies in Performance with IMPSYpi}
-\title{Performing with Flexible and Accessible Intelligent Musical Instruments}
+% \title{Performing with Flexible and Accessible Intelligent Musical Instruments}
+\title{Opening the Design Space: Performing with Intelligent Musical Instruments}
 
 % Developing a Creative Practice with Intelligent Musical Instruments
 
@@ -66,21 +67,46 @@ This system could be applied by a wide community of musicians and instrument des
 \end{figure}
 
 This paper explores how generative AI may be embedded within interactive musical systems for live performance through a series of case study instruments and performances where hardware and software synthesisers and instruments have been coupled with a Linux-based single board computer pre-loaded with generative AI software.
-A broad range of NIME research has applied AI techniques, and in particular deep learning, for tasks such as mapping, audio or sensor analysis and musical data generation~\cite{jourdan_nime_ml_review}. While the analysis of gestures~\cite{visi_iml_gesture} remains a popular application, deep learning models now enable generation of audio~\cite{caillon_rave}, symbolic music~\cite{symbolicmusic2023}, and interaction~\cite{Martin2019} data.
+A broad range of music technology research has applied AI techniques, and in particular deep learning, for tasks such as mapping, audio or sensor analysis and musical data generation~\cite{jourdan_nime_ml_review}. 
+While the analysis of gestures~\cite{visi_iml_gesture} remains a popular application, deep learning models now enable generation of audio~\cite{caillon_rave}, symbolic music~\cite{ji_survey_2024}, and interaction~\cite{Martin2019} data.
 Despite this wide range of research, relatively few intelligent musical instruments, that is, digital musical instruments (DMIs) integrating generative AI, are available to be used in ordinary musical practice.
-The goal of this research is to open the design space of intelligent musical instruments by proposing an approach to creating such systems that is cheap, minimal, and battery-powered, thus enabling integration into a wider variety of musical systems by a diverse population of artists and experimenters. 
-Our IMPSYpi system includes an implementation of a mixture density recurrent neural network (MDRNN), appropriate for generating expressive musical signals from small artist-centered datasets. 
-This system can communicate to existing software and hardware musical systems using MIDI over USB, standard MIDI hardware connections, as well as OSC or WebSockets over a network.
-In this way, existing musical systems can be integrated with a generative AI system to create an intelligent musical instrument that can play by itself or take turns with and adapt to a human performer's input.
-In this research we introduce IMPSYpi and explore its potential through a series of artistic research performances.
-Our experiments show that this idea is feasible and useful for experimenting with human-AI musical interaction.
-We distill lessons learned through ideation, development and performance with these systems to propose design recommendations for future intelligent musical instruments.
-This work could serve as a basis for prototyping further intelligent musical instruments and exploring their application in different creative practices.
+The goal of this research is to open the design space of intelligent musical instruments by introducing a system for creating these instruments that is cheap, small, battery-powered, thus enabling integration into a wider variety of musical systems by a diverse population of artists and experimenters. 
+Our system includes AI software for generating expressive musical signals from small artist-centred datasets, runs on inexpensive Raspberry Pi computers, and is configurable via a web interface.
+As an initial step towards identifying wider variety of intelligent musical instrument designs we report on series of instruments and performance experiences from a first-person perspective, illustrating different ways that this system can be incorporated into an artistic practice.
+
+AI techniques have been applied in music performance at least since the 1990s with interactive systems such as Continuator~\cite{Pachet:2003wd} and Voyager~\cite{Lewis:2000fu} as well as tools such as Wekinator~\cite{fiebrink_meta-instrument_2009} for embedding machine learning models in new musical systems.
+New and more capable deep learning techniques have led to an explosion of interest in AI music making at CHI workshops~\cite{genaichi2022}, music industry white-papers~\cite{goldmedia_ai_2024}, and the general media~\cite{musicpublishers}. Generative AI is now commonly frequently applied in tasks such as sound design~\cite{sound_design_ai_2024}, symbolic music generation~\cite{ji_survey_2024}, and music production~\cite{deruty_development_2022}; however, its use in live musical performances is less widely explored.
+With many now framing generative AI as a threat to musicians' livelihoods~\cite{goldmedia_ai_2024} and fraught with ethical pitfalls~\cite{ethical_genaudio_2023}, it may be appropriate to introduce more artist-centred approaches to creating music with AI.
+
+In this work we introduce a small-data~\cite{Vigliensoni:2022} approach to embedding AI within musical instruments where artists collect, curate, train, and deploy their own intelligent musical instruments.
+We define an intelligent musical instrument as an instrument where an AI system generates actions independently of a musician's actions.
+This definition would encompass Continuator~\cite{Pachet:2003wd} and Voyager~\cite{Lewis:2000fu} but exclude systems such as Wekinator~\cite{fiebrink_meta-instrument_2009} where AI is only used for mapping musicians actions.
+
+
+% Our generative AI system includes an implementation of a mixture density recurrent neural network (MDRNN), appropriate for generating expressive musical signals from small artist-centered datasets. 
+% This system can communicate to existing software and hardware musical systems using MIDI over USB, standard MIDI hardware connections, as well as OSC or WebSockets over a network.
+% In this way, existing musical systems can be integrated with a generative AI system to create an intelligent musical instrument that can play by itself or take turns with and adapt to a human performer's input.
+% In this research we introduce our generative AI system and explore its potential through a series of instrument designs and artistic research performances.
+% Our experiments show that this idea is feasible and useful for experimenting with human-AI musical interaction.
+% We distill lessons learned through ideation, development and performance with these systems to propose design recommendations for future intelligent musical instruments.
+% This work could serve as a basis for prototyping further intelligent musical instruments and exploring their application in different creative practices.
 
 Research applying generative AI on single board computers promises to allow these technologies to be embedded within self-contained musical instruments. 
 This has been demonstrated for Raspberry Pi~\cite{Naess:2019aa, martin_empi} and Bela~\cite{pelinski_pipeline_bela} platforms. 
 Previous work has acknowledged the difficulties faced by instruments builders wishing to embed AI within new instruments in terms of data collection and training~\cite{Martin2019} and cross-compiling code~\cite{pelinski_pipeline_bela}. These efforts are  mirrored in other creative design fields~\cite{teachablemachine}.
 In contrast with very large and costly industrial-scale AI, these projects have emphasised a small data~\cite{Vigliensoni:2022} mindset where artists should collect, curate, train, and deploy their own AI systems. 
+
+Framing a generative AI instrument as a MIDI plug leverages musicians' existing significant skills and understanding of their instruments which could allow a deeper co-creative practice with an AI system.
+The present paper documents the process of creating our GenAI MIDI Plug showing that it is feasible, affordable and achievable for non-experts in AI. 
+This process has also revealed pain points in setting up a generative AI instrument and new possibilities for co-creation that might encourage more widespread prototyping, hacking, and musicking with AI in NIMEs.
+
+\section{Related Work}\label{related-work}
+
+% This work reflects on previous research applying generative AI in performance, embedding AI within new musical instruments, and exploring new interfaces for musical expression through autoethnographic and artistic research methods. 
+
+\subsection{Generative AI in Performance}
+
+Martin et al.~\cite{martin_empi}
 
 Jourdan and Caramiaux have identified gaps in interactivity and practice~\cite{jourdan_nime_ml_review} in AI-supported musical expression, particularly where deep learning is applied. 
 They argued that as deep learning systems have become more complex there have been fewer examples of application in long-term musical practice and artists have less interaction with data collection and training phases. 
@@ -88,65 +114,87 @@ This contrasts with earlier parameter-mapping approaches where long term practic
 A small data approach to deep learning may only be part of the solution. 
 It could be that engaging artists with simpler prototype systems that can be easily integrated into their existing practice could lead to more opportunities for data collection, training, and long-term practice.
 
-Framing a generative AI instrument as a MIDI plug leverages musicians' existing significant skills and understanding of their instruments which could allow a deeper co-creative practice with an AI system.
-The present paper documents the process of creating our GenAI MIDI Plug showing that it is feasible, affordable and achievable for non-experts in AI. 
-This process has also revealed pain points in setting up a generative AI instrument and new possibilities for co-creation that might encourage more widespread prototyping, hacking, and musicking with AI in NIMEs.
-
-\section{Background}\label{background}
-
-\subsection{Generative AI in Performance}
 
 \subsection{Embedded Musical Instruments}
 
+Pelinski et al.~\cite{pelinski_pipeline_bela} demonstrated a pipeline for collecting data and training machine learning models for musical instruments built using the Bela embedded platform~\cite{mcpherson-bela-2016}.
+
+Martin et al.~\cite{martin_empi} examined an embedded AI-based musical instrument and how different embodied representations of musical actions were perceived by improvisors.
+
 \subsection{Research Methods}
+
+This research explores generative AI instruments from a first-person or autoethnographic perspective~\cite{autoethnography-hci} where instruments are created and tested through autobiographical design~\cite{autobiographical-design}. 
+This is related to the practice-based or -led approach~\cite{Smith:2009gf} often applied within creative arts research where knowledge is distilled from an artistic process. Artistic processes have been previously applied as sources of HCI knowledge~\cite{artistic-narratives-hci}. As the goal of this research is to expose design possibilities of a new system, it is appropriate to apply a first-person artistic perspective as an initial step.
 
 
 
 \section{System Design}\label{sys-design}
 
-% Update this to relate specifically to IMPSYpi and the different connectivity methods.
-% This shouldn't go too much into specific examples, just explain how the system works.
+Our generative AI interactive music system consists of Python software, a single board computer, a custom  operating system image that communicates to external electronic music devices over a USB, MIDI, or network connection. 
+Unlike other embedded music systems, this setup is not intended to produce sound but only to control other electronic music devices so the single board computer does not need to have an audio output. 
+Our system is designed so that a musician install the operating system image, which runs our software on boot, onto an SD card and configure the system from their computer using a web browser. 
+After an initial setup the system can be incorporated into an electronic music setup for performances and experiments without further configuration. 
+Alternatively, data recorded to the SD card can be retrieved and used to train new AI models for the system.
+A diagram of our system in use is shown in Figure \ref{fig:system-diagram}.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{figures/impsy-diagram.png}
-    \caption{A diagram of IMPSYpi's interactions with a synthesiser and performer. IMPSYpi connects to other devices via MIDI and receives signals from a human performer or can send signals to control sound on the synthesiser.}
-    \label{fig:enter-label}
+    \caption{A diagram of our generative AI interactive music system with a hardware synthesiser and performer. Our system connects to other devices via MIDI and receives signals from a human performer or can send signals to control sound on the synthesiser. Our software is pre-installed on an operating system image for Raspberry Pi single board computers and runs on even the cheapest Raspberry Pi Zero 2 W (15USD).}
+    \label{fig:system-diagram}
 \end{figure}
-
-The GenAI MIDI Plug system consists of Python software and a minimal hardware setup that able to run the generative AI software and communicate MIDI messages to an external electronic music device. Unlike other embedded music systems, this setup is not intended to produce sound but simply control other electronic music devices so the single board computer does not need to have an audio output. To support our design goals of minimal size and price but with good support for other instrument designers a Raspberry Pi Zero 2 W was used in our project. This single board computer includes a quad-core 64-bit ARM Cortex-A53 at 1GHz with 512MB of RAM. This board meets the cost (15USD as of 2024) and size (65mm x 30mm) requirements. Crucially, it is able to run the 64-bit Raspberry Pi OS ensuring good compatibility with machine learning libraries for Python. The Pi is configured to run our software on boot.
-
 
 \subsection{Hardware}
 
+Our system uses the Raspberry Pi family of single board computers which are widely available and familiar for many electronic instrument designers. Our software works on all Raspberry Pi models that support the 64-bit Raspberry Pi OS which ensures good compatibility with machine libraries for Python. This includes the inexpensive Raspberry Pi Zero 2 W (15USD as of 2025) that includes a quad-core 64-bit ARM Cortex-A53 at 1GHz with 512MB of RAM and which is small enough (65mm x 30mm) to be incorporated inside new instrument designs or attached to existing instruments.
 
-The hardware setup is shown in Figure \ref{fig:system-photo} and consists of a Raspberry Pi Zero 2 W and standard enclosure, a 16GB microSD card and MIDI (5-pin DIN) connector. The MIDI connector is linked via a short cable to the Raspberry Pi and soldered directly to GPIO pads corresponding to the Pi's serial (UART) output. Providing a MIDI output from the Pi's 3.3V signals is straightforward requiring only two resistors~\cite{MIDI-Manufacturers-Association:2014aa}: 10$\Omega$ between the UART TX pin and pin 5 on the MIDI connector and 33$\Omega$ between the 3.3V output and MIDI pin 4. MIDI pin 2 is connected to ground. In our setup, the resistors are concealed within the MIDI connector.
+We have explored several methods of communicating with other devices from the Raspberry Pi. MIDI is used as the primary communication format and our software can send MIDI messages via either a USB-connected MIDI interface, a direct USB MIDI connection to a hardware synthesiser, or from the Raspberry Pi's serial (UART) output. Our software can also communicate over a network using OSC (open sound control) or WebSockets messages. The smallest Raspberry Pi Zero models only support one USB host connection while larger models (e.g., Rasberry Pi 4 Model B) have multiple USB host ports and an Ethernet interface so could support multiple communications channels simultaneously.
+For MIDI-over-serial connections, the MIDI connector can be soldered to the GPIO pads corresponding to the Pi's serial (UART) output. 
+Providing a MIDI output from the Pi's 3.3V signals is straightforward requiring only two resistors~\cite{MIDI-Manufacturers-Association:2014aa}: 10$\Omega$ between the UART TX pin and pin 5 on the MIDI connector and 33$\Omega$ between the 3.3V output and MIDI pin 4. 
+MIDI pin 2 is connected to ground. 
+In the setup shown in Figure \ref{fig:self-playing-volca}, the resistors are concealed within the MIDI connector.
 
-\subsection{Software}
-
-The software part of our system is a Python program running on the Raspberry Pi that generates musical data and sends it via a serial connection to an external MIDI-enabled electronic musical instrument.
-Following Martin and Torresen~\cite{Martin2019}, we use a mixture density recurrent neural network (MDRNN) as the machine learning paradigm for generating a stream of musical data and we apply the Keras-MDN-Layer library~\cite{keras-mdn-layer} to construct this neural network.
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\linewidth]{figures/desk-angle.jpg}
+%     \caption{The GenAI MIDI Plug with cover removed. The hardware consists of a Raspberry Pi Zero 2 W with case, 16GB microSD card, and a MIDI connector soldered directly to the Raspberry Pi.}
+%     \label{fig:system-photo}
+% \end{figure}
 
 \subsection{AI model}
 
-Our system uses a two dimensional MDRNN that generates pairs of data that we interpret as a musical value and time delta for when that value should occur in the future. 
-The network is autoregressive, so takes the preceding value as input to the generate next, but it is also recurrent, so it stores a lossy history of generated values using LSTM units. 
-Our MDRNN model is configured to use 2 layers of 32 LSTM units. Although this is a very small number of parameters compared to industrial generative AI and large language models, it is sufficient for generating musically useful data in real-time on small hardware.
+Following Martin and Torresen~\cite{Martin2019}, we use a mixture density recurrent neural network (MDRNN) as the machine learning paradigm for generating a stream of musical data and we apply the Keras-MDN-Layer library~\cite{keras-mdn-layer} to construct this neural network.
+Our system uses an MDRNN that generates tuples of data that we interpret as number of musical values and a time delta for when that value should occur in the future. 
+The number of musical values is configurable within our software but is at a minimum one, i.e., the system models one musical parameter over time, and we have experimented with up to 16 parameters modelled simultaneously.
+The neural network is autoregressive, so takes the preceding value as input to the generate next, but it is also recurrent, so it stores a lossy history of generated values using LSTM units. 
+We typically use small MDRNN models, e.g., 2 layers of 64 LSTM units.
+Although this is a very small number of parameters compared to industrial generative AI and large language models, it is sufficient for generating musically useful data in real-time on small hardware.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.99\linewidth]{figures/prediction_time_against_units_facet_log.png}
-    \caption{A plot of the time for single AI predictions on different hardware and model size. Even the slowest Raspberry Pi Zero 2 W runs predictions under 5ms using Tensorflow Lite.}
-    \label{fig:inference-time}
-\end{figure}
+Full evaluation of this AI model is beyond the scope of this paper, but we have benchmarked the inference speed. Our experiments showed that with the small models we use (2-layer LSTM with up to 256 units) individual inference steps are completed in under 5ms on all compatible Raspberry Pis (Zero 2 W, 3 Model B, 4 Model B) and well under 1ms on the Raspberry Pi 5. These inference speeds are sufficient for representing smooth MIDI signals. The time for training a new model depends on the size of the training data and speed of the training computer, but effective models can be trained in under 30 minutes on a normal laptop.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/desk-angle.jpg}
-    \caption{The GenAI MIDI Plug with cover removed. The hardware consists of a Raspberry Pi Zero 2 W with case, 16GB microSD card, and a MIDI connector soldered directly to the Raspberry Pi.}
-    \label{fig:system-photo}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.99\linewidth]{figures/prediction_time_against_units_facet_log.png}
+%     \caption{A plot of the time for single AI predictions on different hardware and model size. Even the slowest Raspberry Pi Zero 2 W runs predictions under 5ms using Tensorflow Lite.}
+%     \label{fig:inference-time}
+% \end{figure}
 
+\subsection{Software}
+
+Our system's software is a Python program running on the Raspberry Pi that generates musical data and sends it to external electronic musical instruments.
+This program listens to MIDI signals from the instrument and responds with AI-generated continuations of the performance state.
+MIDI note-on as well as control change messages are supported so our system is able to play notes as well as change the timbre of a connected instrument.
+As mentioned above, our AI model is capable of listening and responding to a number of channels of such MIDI data simultaneously.
+Our software records all data that is received from the MIDI interface and stores this as timestamped logs. This means that performing with our system builds up new datasets allowing new AI models to be trained.
+
+An initial configuration is required to choose the MIDI interface and the specific MIDI signals listen and send to. 
+Configuring such interaction mappings is a design task that fundamentally changes how a created intelligent musical instrument will function. 
+For example, it may be interesting only assign timbral changes to the generative AI system while a performer controls notes (or vice-versa). Alternatively, the performer's notes can be cross-mapped to influence the timbral parameters changed by the generative AI system.
+A simple web interface is provided for adjusting the configuration file, downloading logged data of previous performances and uploading new AI models.
+
+The software for our system is distributed can be installed using Poetry but this can be a laborious process for new users. 
+To accelerate setup with a new instrument we pre-install our software on a Raspberry Pi OS image that can be flashed to an SD card. 
+Our OS image automatically starts the generative AI interaction system and web server programs as and also enables Ethernet-over-USB so that the Raspberry Pi can be directly connected to a computer for configuration.
 
 
 
@@ -211,7 +259,7 @@ This arrangement was first trialled with an Arturia MicroFreak synthesiser with 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{figures/intelligent-s-1.jpg}
-	\caption{A performance setup on the floor with the Roland S-1 synthesiser, Zoom effects pedal, and IMPSYpi running on a Raspberry Pi 4.}
+	\caption{A performance setup on the floor with the Roland S-1 synthesiser, Zoom effects pedal, and IMPSYpi running on a Raspberry Pi 4. This setup was used in a free-improvisation ensemble with performers on different acoustic and electronic instruments.}
 	\label{fig:s-1}
 \end{figure}
 
@@ -235,6 +283,6 @@ This work has introduced a minimal approach to creating an intelligent musical i
 
 
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{nime-references} 
+\bibliography{references} 
 
 \end{document}
