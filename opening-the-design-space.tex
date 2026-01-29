@@ -1,6 +1,19 @@
 % \documentclass[manuscript,review,anonymous]{acmart} % submission
-\documentclass[nonacm]{acmart} % preprint
-% \acmConference[]{} % need to include this to suppress addresses footer
+%\documentclass[sigconf,anonymous,review]{nimeart}
+\documentclass[sigconf]{nimeart}
+
+% NIME specific formatting
+\usepackage{xurl}
+\usepackage{CJKutf8}
+\setcopyright{cc}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{}
+\acmConference[NIME '26]{International Conference on New Interfaces for Musical Expression}{June 23--26,
+  2026}{London, UK}
+\settopmatter{printacmref=false}
+\acmISBN{}
+% end NIME specific formatting
 
 \begin{document}
 
@@ -8,7 +21,6 @@
 % \title{Performing with Flexible and Accessible Intelligent Musical Instruments}
 % Developing a Creative Practice with Intelligent Musical Instruments
 \title{Opening the Design Space: Performing with Intelligent Musical Instruments}
-
 
 \author{Charles Patrick Martin}
 \email{charles.martin@anu.edu.au}
@@ -70,13 +82,13 @@ Our work could enable artists to explore new interaction and performance schemes
 
 % focus on interaction mappings and performance experiences, not data and training.
 
-\begin{figure}
+\begin{figure*}
     \centering
-    \includegraphics[width=0.49\linewidth]{figures/garage-concert-arturia.jpg}
-    \includegraphics[width=0.39\linewidth]{figures/impsy-web-interface-anon.png}
+    \includegraphics[width=0.45\linewidth]{figures/garage-concert-arturia.jpg}
+    \includegraphics[width=0.35\linewidth]{figures/impsy-web-interface-anon.png}
     \caption{The stage setup for an intelligent musical instrument using our generative AI system running on a Raspberry Pi 4 (left) and the web interface for configuring our system (right). The complete setup of synthesiser, Raspberry Pi, and effects pedal is battery powered. Our software reacts to the musicians' actions through knobs and keys on the synthesiser front panel and controls notes and timbral parameters.}
     \label{fig:int-mus-inst}
-\end{figure}
+\end{figure*}
 
 This paper explores how generative AI may be embedded within interactive musical systems for live performance through a series of case study instruments and performances where existing hardware and software instruments have been coupled with a Linux-based single board computer pre-loaded with generative AI software.
 A broad range of music technology research has applied AI techniques, and in particular deep learning, for tasks such as mapping, audio or sensor analysis and musical data generation~\cite{jourdan_nime_ml_review}. 
@@ -152,7 +164,7 @@ A diagram of our system in use is shown in Figure \ref{fig:system-diagram}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/gen-ai-system-diagram.png}
+    \includegraphics[width=0.95\linewidth]{figures/gen-ai-system-diagram.png}
     \caption{Our generative AI interactive music system with a hardware synthesiser. 
     Our system connects to other devices via MIDI and receives signals from a human performer or can send signals to control sound on the synthesiser. 
     Our software is pre-installed on a Raspberry Pi operating system image for  and runs on even the cheapest Raspberry Pi Zero 2 W (15USD).}
@@ -215,7 +227,7 @@ These performance experiences include solo recordings and concerts as well as ap
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/outside-1.jpg}
+    \includegraphics[width=0.95\linewidth]{figures/outside-1.jpg}
     \caption{Battery-powered human-AI interaction on a Korg Volca FM. The generative AI system running on the Raspberry Pi Zero controls pitch and rhythm via the MIDI connector while the musician edits the synth patch. 
     % Video: \url{https://vimeo.com/911078203}
     }
@@ -236,7 +248,7 @@ Performance experiments suggested that this AI model may be more applicable to s
 
 \subsection{The Intelligent MicroFreak and S-1}
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	\includegraphics[width=0.49\linewidth]{figures/intelligent-microfreak-169.jpg}
     \includegraphics[width=0.49\linewidth]{figures/intelligent-s-1.jpg}
@@ -244,7 +256,7 @@ Performance experiments suggested that this AI model may be more applicable to s
     Our software ran on a Raspberry Pi Zero 2 W (left) or Raspberry Pi 4 (right) and in both cases a Zoom effects pedal provided additional audio effects.
     For both setups, the generative AI system generated note data (tracking the keyboard) and seven timbral parameters (tracking knobs on the synthesiser interface).}
 	\label{fig:intelligent-synth}
-\end{figure}
+\end{figure*}
 
 Hardware synths with MIDI outputs and inputs promised to support two-way interaction with our system.
 The capacity for MIDI-over-USB connections was developed to enable our system to connect directly to synthesisers with built-in USB-MIDI interfaces where notes from their keyboard and control changes from their knobs and other interface elements can be sent and received over MIDI.
@@ -267,7 +279,7 @@ The very small size of this synth compromises the playability of the keyboard bu
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/ipad-perf-2.jpg}
+    \includegraphics[width=0.99\linewidth]{figures/ipad-perf-2.jpg}
     \caption{Software synthesisers used in an intelligent instrument setup. Digital audio workstation (DAW) software ran on the iPad which is connected via MIDI to our generative AI system on a Raspberry Pi 4. The performer can interact with the instrument using the iPad touchscreen or a hardware controller interface.}
     \label{fig:intelligent-daw}
 \end{figure}
@@ -297,7 +309,7 @@ Talk about combining multiple inputs and outputs.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
-\begin{table}[]
+\begin{table*}[]
 \caption{Configuration of the performances, recordings, and demonstrations considered as part of the first-person artistic research process in this work throughout 2024 and 2025. This list does not include rehearsal or practice sessions that also took place.
 A "*" in the configuration column denotes where more than one performer used an intelligent instrument studied in this paper, other duo and group performances involved one intelligent instrument (performed by the first author) with other performers using acoustic and conventional electronic instruments.}
 \label{tab:perf-corpus}
@@ -320,7 +332,7 @@ November 2025  & Performance    & Duo           & Setup (S-1/xTouch)          \\
 November 2025  & Performance    & Duo           & Setup (S-1/QuNeo)           \\
 December 2025  & Recording      & Duo           & Setup (S-1/QuNeo)           \\
 \end{tabular}
-\end{table}
+\end{table*}
 
 
 
@@ -350,7 +362,7 @@ My thanks to collaborators and creative partners who made music with me as part 
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{references} 
+\bibliography{references.bib} 
 
 \end{document}
 
