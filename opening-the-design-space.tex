@@ -305,10 +305,30 @@ While all parameters could be adjusted within the touchscreen interface, the add
 
 \subsection{Intelligent Setups}
 
-Talk about combining multiple inputs and outputs.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.99\linewidth]{figures/intelligent-setup-oconner.jpg}
+	\label{fig:intelligent-setup}
+	\caption{An intelligent setup of the Roland S-1 and Keith McMillan QuNeo interfaces with a Raspberry Pi 4 as used in a duo performance in November 2025}
+\end{figure}
 
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
+The above experiments and experiences focussed on a simple use-case where one synthesiser or computer was used for sound output as well as interface input; however, a natural extension is to support multiple interfaces simultaneously, each potentially capable of control input and sound output. 
+In this kind of \emph{intelligent setup}, the AI model mediates events in betweeen the different interfaces. 
+The intelligent DAW idea explained above could enable this kind of extension by programming MIDI routings within the DAW itself, but a better solution for a DAW-less setup was to extend the MIDI mapping capability of our AI system to enable multiple input and output routings.
+
+This idea was originally motivated to support an additional controller for the Roland S-1 synth which has very small control knobs and no visible feedback for synth parameters. 
+A first experiment with the intelligent setup combined the S-1 with a Behringer X-Touch Mini controller with 8 (larger) knobs with LED rings to provide feedback.
+The new mapping enabled the 8 knobs to control the AI model with human control events mapped directly through the S-1. Similarly, control on the S-1 was still available. MIDI outputs to control change could be restricted to a specific output range enabling control over the LED rings.
+This first setup worked well in performance, but the new flexibility of the MIDI mapping encouraged experimentation with interfaces beyond knobs. Substituting the X-Touch for a Keith McMillan QuNeo pad controller enabled control of and feedback from the 8 AI-linked parameters through touch sliders and additional note control with the drum pads. 
+
+In practice, the intelligent setup idea allowed more freedom in choosing how I could control an intelligent instrument and what a performance might look like. 
+With the QuNeo and S-1, I could spend bigger chunks of performances playing (by, e.g., triggering lots of notes from the drum pads), effectively stopping AI control of the S-1.
+The QuNeo control strips made it easier to select reasonably specific values of multiple parameters  quickly while the S-1 were more useful for slow sweeps through parameters.
+With this setup, availability of different control gestures led to different ways of interacting with and managing the unfolding AI process and more ways of understanding the AI model within a performance.
+Over three different performances, this particular setup started to feel like a more comfortable and expressive instrument with potential to sit within and drive different improvisational scenarios.
+
+Its worth noting that at this point, I was more likely to perform with a Raspberry Pi 4 or 5 rather than the Zero 2 W used in early prototypes. Both the boot and inference times were faster on the full-size Raspberry Pi's, a practical and musical consideration for performance.
+
 \begin{table*}[]
 \caption{Configuration of the performances, recordings, and demonstrations considered as part of the first-person artistic research process in this work throughout 2024 and 2025. This list does not include rehearsal or practice sessions that also took place.
 A "*" in the configuration column denotes where more than one performer used an intelligent instrument studied in this paper, other duo and group performances involved one intelligent instrument (performed by the first author) with other performers using acoustic and conventional electronic instruments.}
@@ -327,19 +347,31 @@ October 2024   & Performance    & Group         & S-1                         \\
 December 2024  & Recording      & Duo*          & DAW (AUM, Live)             \\
 January 2025   & Recording      & Solo          & S-1, DAW                    \\
 August 2025    & Performance    & Group         & S-1, DAW                    \\
-October 2025   & Demonstration & Solo          & S-1, Microfreak             \\
+October 2025   & Demonstration  & Solo          & S-1, Microfreak             \\
 November 2025  & Performance    & Duo           & Setup (S-1/xTouch)          \\
 November 2025  & Performance    & Duo           & Setup (S-1/QuNeo)           \\
 December 2025  & Recording      & Duo           & Setup (S-1/QuNeo)           \\
+January 2026   & Performance    & Group         & Setup (S-1/QuNeo)           \\
 \end{tabular}
 \end{table*}
 
-
-
 \section{Discussion}
+
+
+
+\subsection{Mapping and Flexibility}
+
+\subsection{AI Models as a Transportable Instrument Component}
+
+\subsection{A new design space}
 
 \subsection{Limitations}
 
+This research has explored intelligent instrument performance from a first-person perspective. 
+This approach is appropriate for understanding an exploratory design process over a long period of time (2 years).
+In future, it would be beneficial to extend this research to explore intelligent instrument designs from other creative practitioners.
+Reflecting on instruments from musicians of different backgrounds would be likely lead to additional design implications.
+In this research, the potential to update the AI model over multiple practice and performance sessions was not explored in a systematic way. Again, the evolution of a small-data AI model could be an additional aspect to the intelligent instrument design space.
 
 \section{Conclusions}\label{conclusions}
 
@@ -354,11 +386,12 @@ Future work could examine the impact of updating models over time with artist-so
 %% The Ethical Standards section is mandatory for all NIME submissions.
 \section{Ethical Standards}
 
-This paper involved autobiographical study of new interfaces from the author's perspective.
-Where performances were in group settings, other group members were creative collaborators rather than research participants and have been acknowledged below.
+This paper involved autobiographical design and study of new interfaces from the author's perspective.
+Where performances were in group settings, other group members were involved as creative collaborators rather than research participants and have been acknowledged below.
+The machine learning models used in this research were created with the author's own data.
 
 \begin{acks}
-My thanks to collaborators and creative partners who made music with me as part of this project: Alec Hunter, Yichen Wang, Sandy Ma, Richard Johnson and the SoundOut Collective. 
+My thanks to collaborators and creative partners who made music with me as part of this project: Alec Hunter, Yichen Wang, Sandy Ma, Richard Johnson and the SoundOut Collective.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}
