@@ -215,12 +215,34 @@ The software for our system can be installed using Poetry or Python's pip tool b
 To accelerate setup with a new instrument we pre-install our software on a Raspberry Pi OS image that can be flashed to an SD card. 
 The generative AI interaction system and web server programs are started on boot and Ethernet-over-USB is enabled so that the Raspberry Pi can be directly connected to a computer for configuration.
 
+\subsection{Benchmarks and speed testing}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.99\linewidth]{figures/prediction_time_against_units_facet_log.png}
+    \caption{Inference time for differently sized AI models on different Raspberry Pis and an Apple MacBook Air (M1, 16GB). All Pis can run AI predictions in $<5\textrm{ms}$.}
+    \label{fig:inference-time}
+\end{figure}
+
+\begin{table}[]
+\caption{Boot times for different Raspberry Pi models measured from power-on to first MIDI output from the AI model.}
+\begin{tabular}{@{}ll@{}}
+Raspberry Pi Model and RAM & Power-to-Sound (s) \\ \midrule
+Zero 2 W (512MB)   & 114                \\
+4 B (2GB)               & 78               \\
+5 (4GB)               & 38              \\
+\end{tabular}
+\end{table}
+
+While quantitative testing is not a main focus of this paper, we replicated MDRNN inference speed testing previously reported in \cite{Martin2019} to compare saved model formats at Raspberry Pi versions. Model formats compared were the Keras library's native format (keras) and the optimised Tensorflow Lite format (tflite). The tflite format was faster on all platforms and our tests found that even the cheapest Raspberry Pi Zero 2 W can run AI predictions in $<5\textrm{ms}$, below the previous benchmark of 10ms~\cite{Martin2019}. For smaller models, the Raspberry Pi 5 can run AI predictions in less than 0.5ms.
+Our tests revealed that while the Pi Zero 2 W had useful performance on smaller neural networks (considering number of LSTM units as a measure of size), it ran out of memory and did not complete tests on the larger 512-unit model.
+The boot-up time for different Raspberry Pis is another important aspect for integration in musical setups. 
+The Zero 2 W was slow to boot at 114s while the Raspberry Pi 5 starts playing in 38s.
 
 \section{Performance Experiences}\label{case-studies}
 
-
-This section describes five new intelligent musical instruments and the experience of using them in performance over a period of approximately two years (2024-2025).
-In this autobiographical artistic research, these instruments were developed for the first authors' use and tested in live performances, recordings, and demonstrations to expand knowledge about the design space for intelligent musical instruments. The performance style was free improvised music. 
+This section describes five new intelligent musical instruments and the experience of using them in performance over a period of approximately two years (2024-2026).
+In this autobiographical artistic research, these instruments were developed for the first author's use and tested in live performances, recordings, and demonstrations to expand knowledge about the design space for intelligent musical instruments. The performance style was free improvised music.
 These performance experiences include solo recordings and concerts as well as applying intelligent instruments within ensembles of acoustic and electronic instruments. The following sections introduce the systems in roughly chronological order, including reflections on how the designs could be used in performance and what revisions were made to the AI system in response. These reflections cover the 16 performances, recordings, and demonstrations listed in Table~\ref{tab:perf-corpus}.
 
 \subsection{The Self-Playing Volca}
@@ -340,14 +362,14 @@ May 2024       & Recording      & Solo          & Microfreak                  \\
 May 2024       & Performance    & Group*        & Microfreak, DAW (AUM, Live) \\
 June 2024      & Performance    & Duo           & Microfreak                  \\
 June 2024      & Performance    & Group         & Microfreak                  \\
-September 2024 & Demonstration  & Solo          & S-1                         \\
+% September 2024 & Demonstration  & Solo          & S-1                         \\
 September 2024 & Performance    & Solo          & Microfreak, S-1             \\
 September 2024 & Performance    & Duo           & Microfreak                  \\
 October 2024   & Performance    & Group         & S-1                         \\
 December 2024  & Recording      & Duo*          & DAW (AUM, Live)             \\
 January 2025   & Recording      & Solo          & S-1, DAW                    \\
 August 2025    & Performance    & Group         & S-1, DAW                    \\
-October 2025   & Demonstration  & Solo          & S-1, Microfreak             \\
+% October 2025   & Demonstration  & Solo          & S-1, Microfreak             \\
 November 2025  & Performance    & Duo           & Setup (S-1/xTouch)          \\
 November 2025  & Performance    & Duo           & Setup (S-1/QuNeo)           \\
 December 2025  & Recording      & Duo           & Setup (S-1/QuNeo)           \\
@@ -357,13 +379,52 @@ January 2026   & Performance    & Group         & Setup (S-1/QuNeo)           \\
 
 \section{Discussion}
 
+This work has described a two-year practice of intelligent instrument building and exploration in performances and recordings. The goal of this process was to expand the design space of intelligent musical instrument design by trying many prototypes. 
 
+\subsection{Mappings and Flexible Configuration}
 
-\subsection{Mapping and Flexibility}
+% - Draws on experiences across all instruments, especially the intelligent DAW and setups
+% - Links to HCI literature on mapping flexibility and co-creative AI systems
+% - Design implication: Enabling runtime remapping allows artists to discover productive AI interactions without retraining
+
+\subsection{Embodied Understanding Through Multi-Interface Control}
+
+% - Focuses on QuNeo/S-1 setup and DAW experiences where multiple control surfaces shaped interaction
+% - Connects to embodied interaction literature and your HCI/computer music background
+% - Design implication: Multiple simultaneous interfaces provide varied gestural affordances for managing AI behavior
+
+\subsection{Co-creative dynamics}
+
+% - Examines the call-and-response mechanism across MicroFreak, S-1, and intelligent setups
+% - Links to Parkinson & Dunning's taxonomy, interactive music systems literature
+% - Design implication: Sub-second response times enable interleaved human-AI control that feels collaborative rather than oppositional
 
 \subsection{AI Models as a Transportable Instrument Component}
 
-\subsection{A new design space}
+
+
+% - Addresses your 1-hour corpus training approach vs large-scale AI
+% - Connects to Vigliensoni's small data concept and ethical AI concerns you raise
+% - Design implication: Artist-centered data collection/training enables personalized rather than generic AI behaviors
+
+
+
+
+\subsection{Accessible Intelligent Instruments}
+
+An early motivation for this project was the discovery that the cheapest Raspberry Pi Zero 2 W (15USD) might be able to run small generative AI models. The self-playing Volca, MicroFreak, and S-1 confirmed this in different performance situations while revealing the limitations in terms of boot time when using this very low-end hardware. An advantage of the cheap Raspberry Pi's was that I could set up multiple for use in group performances, loaning to collaborators, or dedicate to different instruments. 
+The idea of dedicating single-board computers to different interfaces was established with Satellite CCRMA~\cite{satelliteCCRMA2011}, but it's certainly easier to do this in practice with the cheapest hardware. Of course, I ended up using the more expensive Raspberry Pi 4 and 5 in my personal creative practice, prioritising speed. 
+
+Focussing on MIDI as the communication standard took advantage of MIDI's ubiquity in music hardware to accelerate prototyping opportunities. This work focussed on connecting a generative AI model to lots of different synthesisers and systems to find out what works quickly.
+It was easier to prototype an intelligent system by connecting existing hardware to an existing model in a new way, putting the focus on whether the interaction is musically satisfying.
+This approach built on previous use of OSC~\cite{Martin2019} but required more careful configuration approach to define mappings.
+It's notable that MIDI was particularly useful for connecting the system to a computer for the Intelligent DAW where existing MIDI mapping functionality in Live and AUM was available.
+
+\paragraph{Design implication:} Using cheap single board computers and standard MIDI lowers barriers to prototyping. 
+
+% - Self-playing Volca through to Pi Zero deployments
+% - Links to embedded instrument literature (Bela, previous Pi work) and democratization themes
+% - Design implication: Standard MIDI + cheap SBCs lower barriers to intelligent instrument prototyping
 
 \subsection{Limitations}
 
@@ -377,9 +438,10 @@ In this research, the potential to update the AI model over multiple practice an
 
 This paper has presented our generative AI system for live music performance as a tool for designing and experimenting with new intelligent musical instruments. 
 We argue that the design space for intelligent musical instruments using present AI techniques has yet to be explored and that small-data approaches, such as our system, can lead to artist-centred musical AI.
-Experiments using our system with hardware synths and software DAWs have demonstrated that it is feasible, flexible and musically useful.
+Experience using our system with hardware synths and software DAWs in two years of live performances and recordings have demonstrated that it is feasible, flexible and musically useful.
 In the hardware synth examples, AI-control over notes and timbral parameters led to unique performances and sounds, making up for limitations in synth interface design.
 Our intelligent DAW demonstrated the flexibility of our system when coupled with highly configurable DAW MIDI mappings and expanding the design possibilities for interactions with a DAW as an instrument.
+The intelligent setup allowed combinations of hardware interfaces to open up multiple co-creation styles with the AI system.
 This work contributes design possibilities explored in one creative practice with this system through a first-person reflective process to the ongoing conversation within HCI about how generative AI might be applied in interactive systems.
 Future work could examine the impact of updating models over time with artist-sourced data, and engage artists in co-design processes for creating new intelligent musical instruments.
 
