@@ -1,5 +1,6 @@
 % \documentclass[manuscript,review,anonymous]{acmart} % submission
 \documentclass[sigconf,anonymous,review]{nimeart}
+% \documentclass[sigconf]{nimeart}
 %\documentclass[sigconf]{nimeart}
 
 % NIME specific formatting
@@ -41,7 +42,7 @@ Present musical AI tools are not artist centred and do not support experimentati
 This work introduces an inexpensive generative AI instrument platform based on a single board computer that connects via MIDI to other musical devices.
 The platform uses artist-collected datasets with models trained on a regular computer.
 % 4. Goal: State your paper's focus
-This paper asks what the design space of intelligent musical might look like when accessible and portable AI systems are available for artistic exploration.
+This paper asks what the design space of intelligent musical instruments might look like when accessible and portable AI systems are available for artistic exploration.
 % We aim to demonstrate that our system can open the design space for AI-enabled musical instruments to be created and explored through artistic practice.
 % 5. Findings:  Present key results
 I contribute five examples of instruments created and tested through a two-year first-person artistic research process.
@@ -114,14 +115,14 @@ I define an intelligent musical instrument as an instrument where an AI system g
 This definition would encompass Continuator~\cite{Pachet:2003wd} and Voyager~\cite{Lewis:2000fu} but exclude systems such as Wekinator~\cite{fiebrink_meta-instrument_2009} where AI is used for mapping musicians' actions or interpreting sensor data but not generating independent actions.
 The platform introduced in this paper allows a generative AI algorithm to be incorporated within existing electronic music devices through standard MIDI communication. 
 The AI algorithm is able to control not just notes but the significant variety of timbral parameters that are available in electronic instruments. 
-Similarly, the AI platform can respond to the musician's actions on standard interfaces such as piano-style keyboards as well as other controls such as knobs, sliders, levers, or movement sensors that are typically part of  electronic music devices (e.g., see Figure \ref{fig:int-mus-inst}).
+Similarly, the AI platform can respond to the musician's actions on standard interfaces such as piano-style keyboards as well as other controls such as knobs, sliders, levers, or movement sensors that are typically part of electronic music devices (e.g., see Figure \ref{fig:system-diagram}).
 The AI platform's interaction mappings are configured through a web interface which is also used to retrieve recorded data for re-training the system's machine learning model.
 
 With this platform, intelligent musical instruments can be quickly prototyped and tested through musical performance.
 Incorporating generative AI within electronic instruments leverages musicians' existing significant skills and knowledge which could enable deeper co-creative designs.
 In this work, I describe the new AI music platform, showing that it is affordable and achievable for non-experts in AI to use.
 I document a series of intelligent musical instruments and reflections on two years of performance practice with this system.
-The results contribute an expansion of the design space for intelligent musical instruments, showing the value of (re)mapping as a replacement for retraining, a new co-creative strategy using fast input interleaving, that small-data AI models can be a transportable design resource, and that cheap hardware can lower barriers to inclusion.
+The results contribute an expansion of the design space for intelligent musical instruments, showing the value of (re)mapping as a replacement for retraining, a new co-creative strategy using fast interleaving between human and AI input, that small-data AI models can be a transportable design resource, and that cheap hardware can lower barriers to inclusion.
 More broadly, it has been argued that explorations with technology within artistic practices can contribute to HCI~\cite{improvisation-arts-hci-2018, artistic-narratives-hci, state-of-arts-inchi-2022, interactive-art-hci-2019}.
 This work uses artistic methodologies to contribute to the broader conversation on design principles and patterns for generative AI in HCI~\cite{design-principles-genai-2024} by examining design possibilities that might encourage more widespread prototyping, hacking, and musicking with AI in musical performance.
 
@@ -329,7 +330,7 @@ This represents a convenient way to design new intelligent musical instruments a
 
 An example is illustrated in Figure \ref{fig:intelligent-daw} where a DAW and software plugin host, Kymatica AUM (Audio Mixer), ran on an iPad with eight different sound generators available in channel strips with associated effects.
 The sound generators were a mix of software synthesisers and audio file players.
-Thr generative AI system was configured to respond to eight different MIDI control change channels and generate four different channels of MIDI notes and four channels of control change data.
+The generative AI system was configured to respond to eight different MIDI control change channels and generate four different channels of MIDI notes and four channels of control change data.
 This input and output data is routed internally in AUM and assigned to control different parameters and notes within the sound generators.
 I could influence the AI generated data on the iPad touchscreen via a software MIDI controller or with a hardware MIDI controller connected to AUM with Bluetooth.
 This setup is very flexible in that different sound generators can be loaded or unloaded and the MIDI routing can be adjusted for different performance requirements without necessarily reconfiguring the generative AI software on the Raspberry Pi.
@@ -411,7 +412,7 @@ In this section, I seek to distill the development and performance experiences i
 
 A main finding in this research was that expanding the mapping capability of the generative AI system in terms of inputs, outputs, and direct mapping through the system paid dividends in terms of different instrument designs. 
 This reflects on calls to expand interactivity when operating with ML models~\cite{jourdan_nime_ml_review}. 
-Connecting the generative AI outputs to simultaneously control timbral parameters led to new musical potential in the intelligent MicroFreak, adapting the to a DAW exposed a convenient way to play with how AI inputs and outputs could affect live performance, and supporting simultaneous IO from multiple devices in intelligent setups expanded the gestural affordances for managing and tracking AI behaviours.
+Connecting the generative AI outputs to simultaneously control timbral parameters led to new musical potential in the intelligent MicroFreak, adapting the platform to a DAW exposed a convenient way to play with how AI inputs and outputs could affect live performance, and supporting simultaneous IO from multiple devices in intelligent setups expanded the gestural affordances for managing and tracking AI behaviours.
 
 A learning of the creative process has been that mapping allowed me to find where the generative AI model could have the best musical impact within an intelligent instrument. 
 The earlier prototypes demonstrated that the AI actions were more usefully focussed on what a human could not do (e.g., turn five knobs at once) rather than focussing on note production. 
